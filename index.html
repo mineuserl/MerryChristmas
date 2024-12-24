@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Celebration</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #e0f7fa, #80deea), url('images/christmas-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .heart {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            animation: heartbeat 1s infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 50px;
+            top: 0;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(-45deg);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        .hidden {
+            animation: fadeOut 1s forwards;
+        }
+
+        .letter {
+            display: none;
+            margin-top: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: yellow;
+            border-radius: 50%;
+            top: -10px;
+            animation: fall 5s ease-out forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Snowflake styles */
+        .snowflake {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white; /* Snowflake color */
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            animation: fall 15s linear infinite;
+            opacity: 0.8; /* Make snowflakes slightly transparent */
+        }
+
+        .snowfall {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2; /* Ensure snowflakes are above other elements */
+        }
+    </style>
+</head>
+<body>
+    <div class="snowfall">
+        <!-- Generate snowflakes with random positions and delays -->
+        <script>
+            for (let i = 0; i < 100; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                snowflake.style.animationDelay = `${Math.random() * 10}s`;
+                document.querySelector('.snowfall').appendChild(snowflake); 
+            }
+        </script>
+    </div>
+    <div class="container">
+        <div class="heart" id="heart"></div>
+        <div class="letter" id="letter">
+            <p>Dear Catherine.</p>
+            <p>Merry Christmas! if you see this message, i hope you're being happy, right now and enjoy about yourself. We have been known to each other for 2 weeks the time have been going really fast, isn't it.</p>
+            <p>I'm not perfect, honestly no one is perfect 100%, i may make a mistake and make you upset sometimes and make you confused XD but I will get better and better for us, it's good for you and me.</p>
+            <p>But we didn't think that the time it going to be this fast, right ? We had a lot of memories that we spending together, and it'll have more in future of course.</p>
+            <p>Let's keep looking forward and knowing to each other ❤</p>
+            <p>P.S In the middle of stars, I may not the shiniest one, but i will be there for you, whenver you look up in the sky.</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('heart').addEventListener('click', function() {
+            const heart = document.getElementById('heart');
+            heart.classList.add('hidden');
+            heart.addEventListener('animationend', function() {
+                heart.style.display = 'none';
+            });
+            document.getElementById('letter').style.display = 'block';
+            createConfetti();
+        });
+
+        function getRandomColor() {
+            const colors = ['#ff0', '#f0f', '#0ff', '#f00', '#0f0', '#00f'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>
